@@ -2,6 +2,8 @@
 
 Welcome to my GitHub profile! I'm a passionate developer with a love for coding and problem-solving. Here's a bit about me:
 
+![Profile Views](https://komarev.com/ghpvc/?username=alinapradhan&color=brightgreen)
+
 ## 🚀 About Me
 
 - 🌱 I’m currently learning and exploring new technologies.
