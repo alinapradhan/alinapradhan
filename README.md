@@ -46,7 +46,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 
 ## 🏆 Achievements
 
-- **Hackathons:
+- Hackathon 
 - Presented Research paper in International Conference
 - Presented Analysis on Real time dataset in National level level conference.
 - **Certifications:**
