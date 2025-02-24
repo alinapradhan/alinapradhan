@@ -16,7 +16,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 
 - **Languages:** Python, SQL, HTML, CSS
 - **Databases:** MySQL, MongoDB
-- **Tools:** Git, Docker, Jupyteer Notebook, Deepnote
+- **Tools:** Git, Docker, Jupyter Notebook, Deepnote
 - **Cloud:** Azure
 
 ## 📈 GitHub Stats
@@ -46,7 +46,10 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 
 ## 🏆 Achievements
 
-- Hackathon 
+- Hackathon-VizQuest 3.0 Project
+Secured All India Rank - 5th in the data
+visualization project of VizQuest 3.0 by IIM Nagpur
+
 - Presented Research paper in International Conference
 - Presented Analysis on Real time dataset in National level level conference.
 - **Certifications:**
