@@ -49,12 +49,11 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - Hackathon-VizQuest 3.0 Project
 Secured All India Rank - 5th in the data
 visualization project of VizQuest 3.0 by IIM Nagpur
-
-- Presented Research paper in International Conference
-- Presented Analysis on Real time dataset in National level level conference.
-- **Certifications:**
-- Pursuing Machine learning from coursera
-- Introduction to Data Engineering
+- Presented Research paper in National Conference
+  topic: ANNs in prediction and detection of cyberattacks in smartgrids.
+-  Certifications:
+- Machine learning from coursera
+- Introduction to Data Engineering from coursera
 
 <!-- ## 📂 Projects
 
