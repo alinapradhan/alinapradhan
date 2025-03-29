@@ -19,16 +19,6 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - **Tools:** Git, Docker, Jupyter Notebook, Deepnote
 - **Cloud:** Azure
 
-## 📈 GitHub Stats
-
-![Alina's GitHub Stats](https://github-readme-stats.vercel.app/api?username=alinapradhan&show_icons=true&theme=radical)
-
-## 🏆 GitHub Trophies
-![trophy](https://github-profile-trophy.vercel.app/?username=alinapradhan)
-
-## 🔥 GitHub Streak
-
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=alinapradhan&theme=dark)](https://git.io/streak-stats)
 
 <!--
 ## 📝 Latest Blog Posts
