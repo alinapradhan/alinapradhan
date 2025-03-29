@@ -62,3 +62,6 @@ A brief description of what the project does and its purpose.
 Feel free to explore my repositories and get in touch if you'd like to collaborate on a project!
 
 ---
+## 📊 GitHub Activity
+
+![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=alinapradhan&theme=react)
