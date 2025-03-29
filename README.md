@@ -47,6 +47,12 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 
 <!-- ## 📂 Projects
 
+
+ 📊 GitHub Activity
+
+![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=alinapradhan&theme=react)
+
+
 ### [Project 1: Awesome Project](https://github.com/alinapradhan/awesome-project)
 A brief description of what the project does and its purpose.
 
