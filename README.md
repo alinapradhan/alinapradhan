@@ -62,8 +62,3 @@ A brief description of what the project does and its purpose.
 Feel free to explore my repositories and get in touch if you'd like to collaborate on a project!
 
 ---
-## 📊 GitHub Activity
-
-## 📊 GitHub Stats  
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=alinapradhan&show_icons=true&theme=dark)
