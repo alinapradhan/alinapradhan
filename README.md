@@ -17,7 +17,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - **Languages:** Python, SQL, R ,HTML, CSS
 - **Databases:** MySQL, MongoDB
 - **Tools:** Git, Docker, Jupyter Notebook, Deepnote , Hadoop , Spark , Spyder , Anaconda
-- **OS** Windows, Linux 
+- **OS:** Windows, Linux 
 - **Cloud:** Azure, AWS
 
 
