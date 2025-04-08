@@ -44,6 +44,8 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 -  Certifications:
 - Machine learning from coursera
 - Introduction to Data Engineering from coursera
+- Machine Learning from NPTEL
+- AI in Marketing from NPTEL
 
 <!-- ## 📂 Projects
 
