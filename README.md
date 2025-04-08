@@ -41,7 +41,7 @@ Secured All India Rank - 5th in the data
 visualization project of VizQuest 3.0 by IIM Nagpur
 - Presented Research paper in National Conference
   topic: ANNs in prediction and detection of cyberattacks in smartgrids.
--  Certifications:
+   Certifications:
 - Machine learning from coursera
 - Introduction to Data Engineering from coursera
 - Machine Learning from NPTEL
