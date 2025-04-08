@@ -19,7 +19,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - **Tools:** Git, Docker, Jupyter Notebook, Deepnote , Hadoop , Spark , Spyder , Anaconda
 - **OS:** Windows, Linux 
 - **Cloud:** Azure, AWS
-- **Additional:** DSA, AI/ML, Maths, Biology
+- **Additional:** DSA, AI/ML, Maths, Biology, Geography
 
 
 
