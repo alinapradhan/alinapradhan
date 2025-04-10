@@ -49,7 +49,7 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 - Introduction to Data Engineering from coursera
 - Machine Learning from NPTEL
 - AI in Marketing from NPTEL
-
+- Geo-data sharing and cyber security from ISRO
 <!-- ## 📂 Projects
 
 
