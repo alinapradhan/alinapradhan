@@ -50,12 +50,26 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 - Machine Learning from NPTEL
 - AI in Marketing from NPTEL
 - Geo-data sharing and cyber security from ISRO
+
+
+
+
+
+
+
+Do we need to heat Mars from bottom to support life ?? 
 <!-- ## 📂 Projects
 
 
  📊 GitHub Activity
 
 ![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=alinapradhan&theme=react)
+
+
+
+## 
+
+
 
 
 ### [Project 1: Awesome Project](https://github.com/alinapradhan/awesome-project)
