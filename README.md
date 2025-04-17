@@ -58,6 +58,9 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 
 
 Do we need to heat Mars from bottom to support life ?? 
+
+answer:
+We don't need to heat Mars from the bottom to support life. The focus should be on atmospheric engineering, surface warming, and habitat design.
 <!-- ## 📂 Projects
 
 
