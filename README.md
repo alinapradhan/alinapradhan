@@ -21,7 +21,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - **Cloud:** Azure, AWS
 - **Additional:** DSA, AI/ML, Maths, Biology, Geography
 
-![Radar Graph](radar_graph.png)
+
 
 
 <!--
