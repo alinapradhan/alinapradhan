@@ -62,27 +62,7 @@ Do we need to heat Mars from bottom to support life ??
 answer:
 We don't need to heat Mars from the bottom to support life. The focus should be on atmospheric engineering, surface warming, and habitat design.
 
-[My GitHub Radar](https://github.com/alinapradhan/alinapradhan/blob/main/github-metrics.svg)
 
-
-
- 📊 GitHub Activity
-
-![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=alinapradhan&theme=react)
-
-
-
-
-![My GitHub Radar](https://github.com/yourusername/yourusername/blob/main/github-metrics.svg)
-
-
-
-### [Project 1: Awesome Project](https://github.com/alinapradhan/awesome-project)
-A brief description of what the project does and its purpose.
-
-### [Project 2: Another Cool Project](https://github.com/alinapradhan/another-cool-project)
-A brief description of what the project does and its purpose.
--->
 Feel free to explore my repositories and get in touch if you'd like to collaborate on a project!
 
 ---
