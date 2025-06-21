@@ -12,7 +12,7 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 
 ## 🛠️ Skills
 
-- **Languages:** Python, SQL, R ,HTML, CSS
+- **Languages:** Python, Scala, SQL, R, HTML, CSS 
 - **Databases:** MySQL, MongoDB
 - **Tools:** Git, Docker, Jupyter Notebook, Deepnote , Hadoop , Spark , Spyder , Anaconda
 - **OS:** Windows, Linux, Ubuntu
