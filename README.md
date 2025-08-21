@@ -10,31 +10,6 @@ Welcome to my GitHub profile! I'm a passionate developer with a love for coding 
 - 📫 How to reach me: [Your Email](mailto:alinapradhan15021707@gmail.com)
 - ⚡ Fun fact: I love volleyballlll,swimminggg, athletics andddd deadlifting.
 
-## 🛠️ Skills
-
-- **Languages:** Python, Scala, SQL, R, HTML, CSS 
-- **Databases:** MySQL, MongoDB
-- **Tools:** Git, Docker, Jupyter Notebook, Deepnote , Hadoop , Tableau, Spark , Spyder , Anaconda
-- **OS:** Windows, Linux, Ubuntu
-- **Cloud:** Azure, AWS
-- **Additional:** DSA, AI/ML, Maths, Biology, Geography
-
-
-
-
-<!--
-## 📝 Latest Blog Posts
-
- BLOG-POST-LIST:START
-- [How to Build a REST API with Node.js](https://yourblog.com/how-to-build-a-rest-api-with-nodejs)
-- [Introduction to React Hooks](https://yourblog.com/introduction-to-react-hooks)
-- [Understanding Asynchronous JavaScript](https://yourblog.com/understanding-asynchronous-javascript)
-  BLOG-POST-LIST:END -->
-
-<!--
-[![Twitter](https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter)](https://twitter.com/alinapradhan)
-[![Email](https://img.shields.io/badge/Email-blue?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
--->
 
 ## 🏆 Achievements
 
