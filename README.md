@@ -1,6 +1,6 @@
 # Namaste,Hello,Hola,Ciao,Marhaba,Privet !! I'm Alina Pradhan! 👋
 
-Welcome to my GitHub profile! I'm a passionate developer with a love for coding and problem-solving. Here's a bit about me:
+Welcome to my GitHub profile! I'm a passionate AI engineer with curiosity to integrate algorithms for the goodness of mankind. Here's a bit about me:
 
 ## 🚀 About Me
 
