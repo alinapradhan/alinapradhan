@@ -1,6 +1,6 @@
 # Namaste,Hello,Hola,Ciao,Marhaba,Privet !! I'm Alina Pradhan! 👋
 
-Welcome to my GitHub profile! I'm an ML engineer enthusiast with curiosity to integrate algorithms for the goodness of mankind. Here's a bit about me:
+Welcome to my GitHub profile! I'm a ML engineer enthusiast with curiosity to integrate algorithms for the goodness of mankind. Here's a bit about me:
 
 ## 🚀 About Me
 
