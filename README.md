@@ -7,7 +7,7 @@ Welcome to my GitHub profile! I'm an AI engineer enthusiast with curiosity to in
 - 🌱 I’m currently learning and exploring new technologies.
 - 👯 I’m looking to collaborate on open-source projects.
 - 💬 Ask me about anything related to Data Science and AI/ML.
-- 📫 How to reach me: [Your Email](mailto:alinapradhan15021707@gmail.com)
+- 📫 How to reach me: [Email](mailto:alinapradhan15021707@gmail.com)
 - ⚡ Fun fact: I love volleyballlll,swimminggg, athletics andddd deadlifting.
 
 
