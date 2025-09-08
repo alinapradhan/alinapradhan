@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Detection Results - AI Crop Disease Detection{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-image"></i> Analyzed Image
+                </h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ url_for('static', filename=image_path.replace('static/', '')) }}" 
+                     class="img-fluid rounded border" 
+                     style="max-height: 400px;">
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header {% if result.is_healthy %}bg-success{% else %}bg-warning{% endif %} text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-stethoscope"></i> Detection Results
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-4"><strong>Plant Type:</strong></div>
+                    <div class="col-sm-8">{{ result.plant }}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-4"><strong>Condition:</strong></div>
+                    <div class="col-sm-8">
+                        <span class="badge {% if result.is_healthy %}bg-success{% else %}bg-danger{% endif %} fs-6">
+                            {{ result.disease }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-4"><strong>Confidence:</strong></div>
+                    <div class="col-sm-8">
+                        <div class="progress">
+                            <div class="progress-bar {% if result.confidence > 0.8 %}bg-success{% elif result.confidence > 0.6 %}bg-warning{% else %}bg-danger{% endif %}" 
+                                 style="width: {{ result.confidence * 100 }}%">
+                                {{ "%.1f"|format(result.confidence * 100) }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-4"><strong>Analysis Time:</strong></div>
+                    <div class="col-sm-8">{{ "%.3f"|format(result.inference_time) }} seconds</div>
+                </div>
+                
+                {% if has_location %}
+                <div class="row mb-3">
+                    <div class="col-sm-4"><strong>Location:</strong></div>
+                    <div class="col-sm-8">
+                        <i class="fas fa-map-marker-alt text-success"></i> 
+                        Recorded for disease tracking
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="alert {% if result.is_healthy %}alert-success{% else %}alert-warning{% endif %} mt-3">
+                    {% if result.is_healthy %}
+                        <i class="fas fa-check-circle"></i> 
+                        <strong>Good news!</strong> Your plant appears to be healthy.
+                    {% else %}
+                        <i class="fas fa-exclamation-triangle"></i> 
+                        <strong>Disease detected!</strong> Consider taking preventive action.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar"></i> Top 5 Predictions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Plant</th>
+                                <th>Disease/Condition</th>
+                                <th>Confidence</th>
+                                <th>Probability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prediction in result.top5_predictions %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ prediction.plant }}</td>
+                                <td>
+                                    <span class="badge {% if 'healthy' in prediction.disease.lower() %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ prediction.disease }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar" style="width: {{ prediction.confidence * 100 }}%">
+                                            {{ "%.1f"|format(prediction.confidence * 100) }}%
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ "%.4f"|format(prediction.confidence) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not result.is_healthy %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-warning shadow">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="fas fa-prescription-bottle-alt"></i> Recommended Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-info-circle"></i> General Disease Management:</h6>
+                    <ul class="mb-0">
+                        <li>Remove and destroy affected plant parts</li>
+                        <li>Improve air circulation around plants</li>
+                        <li>Avoid overhead watering</li>
+                        <li>Apply appropriate fungicide if available</li>
+                        <li>Monitor other plants for similar symptoms</li>
+                        <li>Consult with local agricultural extension services</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-warning">
+                    <h6><i class="fas fa-exclamation-triangle"></i> Important:</h6>
+                    <p class="mb-0">
+                        This AI detection is for guidance only. For critical decisions, 
+                        please consult with agricultural experts or plant pathologists.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-12 text-center">
+        <a href="{{ url_for('upload_file') }}" class="btn btn-primary btn-lg me-3">
+            <i class="fas fa-upload"></i> Analyze Another Image
+        </a>
+        <a href="{{ url_for('camera_detection') }}" class="btn btn-success btn-lg me-3">
+            <i class="fas fa-camera"></i> Use Camera
+        </a>
+        <a href="{{ url_for('disease_map') }}" class="btn btn-info btn-lg">
+            <i class="fas fa-map-marked-alt"></i> View Disease Map
+        </a>
+    </div>
+</div>
+{% endblock %}

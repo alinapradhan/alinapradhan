@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}Disease Map - AI Crop Disease Detection{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">
+                    <i class="fas fa-map-marked-alt"></i> Disease Hotspot Map
+                </h4>
+            </div>
+            <div class="card-body">
+                {% if map_available %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <iframe src="{{ url_for('static', filename='disease_map.html') }}" 
+                                    width="100%" 
+                                    height="500" 
+                                    style="border: 1px solid #ddd; border-radius: 5px;">
+                            </iframe>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-chart-pie"></i> Hotspot Statistics</h6>
+                            {% if hotspots %}
+                                {% for hotspot in hotspots %}
+                                <div class="card mb-3 border-warning">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-danger">
+                                            <i class="fas fa-exclamation-triangle"></i> 
+                                            Hotspot {{ loop.index }}
+                                        </h6>
+                                        <p class="card-text">
+                                            <strong>Location:</strong> {{ hotspot.location_name[:50] }}...<br>
+                                            <strong>Detections:</strong> {{ hotspot.total_detections }}<br>
+                                            <strong>Common Disease:</strong> {{ hotspot.most_common_disease }}<br>
+                                            <strong>Plant Type:</strong> {{ hotspot.most_common_plant }}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> 
+                                    No disease hotspots detected yet. More data needed for hotspot analysis.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning text-center">
+                        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                        <h5>No Disease Data Available</h5>
+                        <p>No disease detections have been recorded yet. Upload some plant images to start mapping disease patterns.</p>
+                        <a href="{{ url_for('upload_file') }}" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Upload Plant Image
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-question-circle"></i> How Disease Mapping Works
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Each disease detection is recorded with GPS coordinates</li>
+                    <li>Hotspots are identified where multiple diseases occur nearby</li>
+                    <li>Color coding shows different disease types and severity</li>
+                    <li>Farmers can identify problem areas and take preventive action</li>
+                    <li>Agricultural authorities can monitor disease spread patterns</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-leaf"></i> Benefits for Agriculture
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Early detection of disease outbreaks</li>
+                    <li>Targeted intervention strategies</li>
+                    <li>Resource optimization for treatments</li>
+                    <li>Crop yield protection and improvement</li>
+                    <li>Data-driven agricultural decision making</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-search"></i> Search Nearby Diseases
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="search-lat" 
+                                   placeholder="Latitude" 
+                                   step="any">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="search-lng" 
+                                   placeholder="Longitude" 
+                                   step="any">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="search-radius" 
+                                   placeholder="Radius (km)" 
+                                   value="10" 
+                                   min="1" 
+                                   max="100">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" id="search-nearby">
+                            <i class="fas fa-search"></i> Search Nearby
+                        </button>
+                        <button class="btn btn-success" id="use-my-location">
+                            <i class="fas fa-map-marker-alt"></i> Use My Location
+                        </button>
+                    </div>
+                </div>
+                <div id="search-results" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Use my location button
+    document.getElementById('use-my-location').addEventListener('click', function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById('search-lat').value = position.coords.latitude.toFixed(6);
+                document.getElementById('search-lng').value = position.coords.longitude.toFixed(6);
+            }, function(error) {
+                alert('Could not get your location: ' + error.message);
+            });
+        } else {
+            alert('Geolocation is not supported by this browser');
+        }
+    });
+    
+    // Search nearby diseases
+    document.getElementById('search-nearby').addEventListener('click', function() {
+        const lat = parseFloat(document.getElementById('search-lat').value);
+        const lng = parseFloat(document.getElementById('search-lng').value);
+        const radius = parseFloat(document.getElementById('search-radius').value);
+        
+        if (isNaN(lat) || isNaN(lng) || isNaN(radius)) {
+            alert('Please enter valid coordinates and radius');
+            return;
+        }
+        
+        // Show loading
+        document.getElementById('search-results').innerHTML = `
+            <div class="alert alert-info">
+                <i class="fas fa-spinner fa-spin"></i> Searching for nearby diseases...
+            </div>
+        `;
+        
+        // Fetch nearby detections
+        fetch(`/api/nearby_detections?lat=${lat}&lng=${lng}&radius=${radius}`)
+            .then(response => response.json())
+            .then(data => {
+                displaySearchResults(data);
+            })
+            .catch(error => {
+                document.getElementById('search-results').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> Error searching: ${error.message}
+                    </div>
+                `;
+            });
+    });
+    
+    function displaySearchResults(data) {
+        const resultsDiv = document.getElementById('search-results');
+        
+        if (data.error) {
+            resultsDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> ${data.error}
+                </div>
+            `;
+            return;
+        }
+        
+        if (data.detections.length === 0) {
+            resultsDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> No diseases detected in this area!
+                </div>
+            `;
+            return;
+        }
+        
+        let html = `
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                Found ${data.count} disease detection(s) in the specified area
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Plant</th>
+                            <th>Disease</th>
+                            <th>Distance (km)</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        data.detections.forEach(detection => {
+            html += `
+                <tr>
+                    <td>${detection.plant_type}</td>
+                    <td><span class="badge bg-danger">${detection.disease_name}</span></td>
+                    <td>${detection.distance_km}</td>
+                    <td>${(detection.confidence * 100).toFixed(1)}%</td>
+                    <td>${detection.timestamp.split('T')[0]}</td>
+                </tr>
+            `;
+        });
+        
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        
+        resultsDiv.innerHTML = html;
+    }
+});
+</script>
+{% endblock %}
