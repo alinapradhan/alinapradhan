@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}Camera Detection - AI Crop Disease Detection{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">
+                    <i class="fas fa-camera"></i> Real-time Crop Disease Detection
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="camera-container text-center">
+                            <video id="video" autoplay playsinline class="border rounded" style="max-width: 100%; height: auto;"></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            
+                            <div class="mt-3">
+                                <button id="start-camera" class="btn btn-success me-2">
+                                    <i class="fas fa-play"></i> Start Camera
+                                </button>
+                                <button id="capture" class="btn btn-primary me-2" disabled>
+                                    <i class="fas fa-camera"></i> Capture & Analyze
+                                </button>
+                                <button id="stop-camera" class="btn btn-danger" disabled>
+                                    <i class="fas fa-stop"></i> Stop Camera
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="detection-results">
+                            <h6><i class="fas fa-stethoscope"></i> Detection Results</h6>
+                            <div id="results-container">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> 
+                                    Start camera and capture an image to begin analysis
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <h6><i class="fas fa-map-marker-alt"></i> Location Status</h6>
+                            <div id="location-status">
+                                <div class="alert alert-secondary">
+                                    <i class="fas fa-spinner fa-spin"></i> Getting location...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-light">
+                <h6 class="mb-0">
+                    <i class="fas fa-question-circle"></i> How to Use Camera Detection
+                </h6>
+            </div>
+            <div class="card-body">
+                <ol class="mb-0">
+                    <li>Click "Start Camera" to begin video capture</li>
+                    <li>Position the plant leaf in the camera frame</li>
+                    <li>Ensure good lighting and focus</li>
+                    <li>Click "Capture & Analyze" to take a photo and detect diseases</li>
+                    <li>Review the results and capture additional images if needed</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+class CameraDetection {
+    constructor() {
+        this.video = document.getElementById('video');
+        this.canvas = document.getElementById('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.stream = null;
+        this.userLocation = null;
+        
+        this.initializeButtons();
+        this.getUserLocation();
+    }
+    
+    initializeButtons() {
+        document.getElementById('start-camera').addEventListener('click', () => this.startCamera());
+        document.getElementById('capture').addEventListener('click', () => this.captureAndAnalyze());
+        document.getElementById('stop-camera').addEventListener('click', () => this.stopCamera());
+    }
+    
+    async startCamera() {
+        try {
+            this.stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 },
+                    facingMode: 'environment' // Use back camera on mobile
+                } 
+            });
+            
+            this.video.srcObject = this.stream;
+            
+            // Update button states
+            document.getElementById('start-camera').disabled = true;
+            document.getElementById('capture').disabled = false;
+            document.getElementById('stop-camera').disabled = false;
+            
+            console.log('Camera started successfully');
+        } catch (error) {
+            console.error('Error starting camera:', error);
+            this.showError('Could not access camera: ' + error.message);
+        }
+    }
+    
+    stopCamera() {
+        if (this.stream) {
+            this.stream.getTracks().forEach(track => track.stop());
+            this.video.srcObject = null;
+            
+            // Update button states
+            document.getElementById('start-camera').disabled = false;
+            document.getElementById('capture').disabled = true;
+            document.getElementById('stop-camera').disabled = true;
+            
+            console.log('Camera stopped');
+        }
+    }
+    
+    captureAndAnalyze() {
+        if (!this.stream) {
+            this.showError('Camera not started');
+            return;
+        }
+        
+        // Set canvas dimensions to match video
+        this.canvas.width = this.video.videoWidth;
+        this.canvas.height = this.video.videoHeight;
+        
+        // Capture frame
+        this.ctx.drawImage(this.video, 0, 0);
+        
+        // Convert to base64
+        const imageData = this.canvas.toDataURL('image/jpeg', 0.8);
+        
+        // Show loading state
+        this.showLoading();
+        
+        // Send for analysis
+        this.analyzeImage(imageData);
+    }
+    
+    async analyzeImage(imageData) {
+        try {
+            const payload = {
+                image: imageData,
+                latitude: this.userLocation ? this.userLocation.latitude : null,
+                longitude: this.userLocation ? this.userLocation.longitude : null
+            };
+            
+            const response = await fetch('/predict_base64', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                this.displayResults(data.result);
+            } else {
+                this.showError('Analysis failed: ' + data.error);
+            }
+        } catch (error) {
+            console.error('Analysis error:', error);
+            this.showError('Network error during analysis');
+        }
+    }
+    
+    displayResults(result) {
+        const container = document.getElementById('results-container');
+        
+        const healthStatus = result.is_healthy ? 'Healthy' : 'Disease Detected';
+        const statusColor = result.is_healthy ? 'success' : 'danger';
+        const statusIcon = result.is_healthy ? 'check-circle' : 'exclamation-triangle';
+        
+        container.innerHTML = `
+            <div class="alert alert-${statusColor}">
+                <h6><i class="fas fa-${statusIcon}"></i> ${healthStatus}</h6>
+                <hr>
+                <p><strong>Plant:</strong> ${result.plant}</p>
+                <p><strong>Condition:</strong> ${result.disease}</p>
+                <p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(1)}%</p>
+                <p><strong>Time:</strong> ${result.inference_time.toFixed(3)}s</p>
+            </div>
+            
+            <div class="mt-3">
+                <h6>Top Predictions:</h6>
+                ${result.top5_predictions.slice(0, 3).map((pred, idx) => `
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <small>${idx + 1}. ${pred.disease}</small>
+                        <small class="text-muted">${(pred.confidence * 100).toFixed(1)}%</small>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        // Play sound notification
+        this.playNotificationSound(result.is_healthy);
+    }
+    
+    showLoading() {
+        document.getElementById('results-container').innerHTML = `
+            <div class="alert alert-info">
+                <i class="fas fa-spinner fa-spin"></i> Analyzing image...
+            </div>
+        `;
+    }
+    
+    showError(message) {
+        document.getElementById('results-container').innerHTML = `
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i> ${message}
+            </div>
+        `;
+    }
+    
+    getUserLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    this.userLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+                    
+                    document.getElementById('location-status').innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="fas fa-check"></i> Location enabled for disease tracking
+                        </div>
+                    `;
+                },
+                (error) => {
+                    console.error('Location error:', error);
+                    document.getElementById('location-status').innerHTML = `
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> Location unavailable
+                        </div>
+                    `;
+                }
+            );
+        } else {
+            document.getElementById('location-status').innerHTML = `
+                <div class="alert alert-warning">
+                    <i class="fas fa-times"></i> Geolocation not supported
+                </div>
+            `;
+        }
+    }
+    
+    playNotificationSound(isHealthy) {
+        // Create audio context for notification
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = isHealthy ? 800 : 400; // Higher tone for healthy
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        } catch (error) {
+            console.log('Audio notification not available');
+        }
+    }
+}
+
+// Initialize camera detection when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    new CameraDetection();
+});
+</script>
+{% endblock %}
