@@ -20,9 +20,9 @@ visualization project of VizQuest 3.0 by IIM Nagpur
   topic: ANNs in prediction and detection of cyberattacks in smartgrids.
 
 
-##  Q&A
+## :thinking:  Q&A
 
-Do we need to heat Mars from bottom to support life ?? 
+Do we need to heat Mars from bottom to support life ?? :earth_africa: :fire:
 
-answer:
+answer: :rocket:
 We don't need to heat Mars from the bottom to support life. The focus should be on atmospheric engineering, surface warming, and habitat design.
