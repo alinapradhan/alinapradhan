@@ -1,4 +1,4 @@
-# Namaste,Hello,Hola,Ciao,Marhaba,Privet !! I'm Alina Pradhan! 👋
+# Namaste,Hello,Hola,Ciao,Marhaba,Privet !! I'm Alina Pradhan! 
 
 Welcome to my GitHub profile! I'm an AI engineer enthusiast with curiosity to integrate algorithms for the goodness of mankind. Here's a bit about me:
 
