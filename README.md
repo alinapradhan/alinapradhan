@@ -5,7 +5,6 @@
 - 🌱 I’m currently learning and exploring new technologies.  
 - 🤝 I’m looking to collaborate on open-source projects.  
 - 💡 Ask me about anything related to Data Science and AI/ML.  
-- 📬 How to reach me: [Email](mailto:alina15021707@gmail.com)  
 - 🏐 Fun fact: I love volleyballlll, swimminggg 🏊, athletics 🏃‍♀️ andddd deadlifting 🏋️‍♀️.
 
 ## 🏆 Achievements
