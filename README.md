@@ -13,7 +13,8 @@
 Secured All India Rank - 5th in the data
 visualization project of VizQuest 3.0 by IIM Nagpur
 - Presented Research paper in National Conference
-  topic: ANNs in prediction and detection of cyberattacks in smartgrids.
+  topic: Securing Smart Grids with Deep Learning: A CNN Approach to
+Predictive Anomaly Detection
 
 
 ## :thinking:  Q&A
