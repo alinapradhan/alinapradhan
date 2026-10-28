@@ -1,13 +1,13 @@
 # Namaste,Hello,Hola,Ciao,Marhaba,Privet !! I'm Alina Pradhan! 
 
-## 👩‍💻 About Me  
+## About Me  
 
-- 🌱 I’m currently learning and exploring new technologies.  
-- 🤝 I’m looking to collaborate on open-source projects.  
-- 💡 Ask me about anything related to Data Science and AI/ML.  
-- 🏐 Fun fact: I love volleyballlll, swimminggg 🏊, athletics 🏃‍♀️ andddd deadlifting 🏋️‍♀️.
+-  I’m currently learning and exploring new technologies.  
+-  I’m looking to collaborate on open-source projects.  
+-  Ask me about anything related to Data Science and AI/ML.  
+-  Fun fact: I love volleyballlll, swimminggg , athletics andddd deadlifting .
 
-## 🏆 Achievements
+##  Achievements
 
 - Hackathon-VizQuest 3.0 Project
 Secured All India Rank - 5th in the data
@@ -17,11 +17,11 @@ visualization project of VizQuest 3.0 by IIM Nagpur
 Predictive Anomaly Detection
 
 
-## :thinking:  Q&A
+## Q&A
 
-Do we need to heat Mars from bottom to support life ?? :earth_africa: :fire:
+Do we need to heat Mars from bottom to support life ?? 
 
-answer: :rocket:
+answer:
 We don't need to heat Mars from the bottom to support life. The focus should be on atmospheric engineering, surface warming, and habitat design.
 
 
